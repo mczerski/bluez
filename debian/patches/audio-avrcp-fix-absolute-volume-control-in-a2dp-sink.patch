@@ -1,0 +1,59 @@
+From 50efa450637f639f3ed11326ad08946f2dd143c6 Mon Sep 17 00:00:00 2001
+From: Marek Czerski <ma.czerski@gmail.com>
+Date: Tue, 19 Jan 2021 20:59:09 +0100
+Subject: [PATCH] audio: avrcp: fix absolute volume control in a2dp sink
+ scenario
+
+---
+ profiles/audio/avrcp.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/profiles/audio/avrcp.c b/profiles/audio/avrcp.c
+index d5eba39..3f5c2e4 100644
+--- a/profiles/audio/avrcp.c
++++ b/profiles/audio/avrcp.c
+@@ -3949,7 +3949,7 @@ static void target_init(struct avrcp *session)
+ 	DBG("%p version 0x%04x", target, target->version);
+ 
+ 	service = btd_device_get_service(session->dev, AVRCP_REMOTE_UUID);
+-	btd_service_connecting_complete(service, 0);
++	//btd_service_connecting_complete(service, 0);
+ 
+ 	player = g_slist_nth_data(server->players, 0);
+ 	if (player != NULL) {
+@@ -3963,14 +3963,15 @@ static void target_init(struct avrcp *session)
+ 				(1 << AVRCP_EVENT_TRACK_REACHED_END) |
+ 				(1 << AVRCP_EVENT_SETTINGS_CHANGED);
+ 
+-	if (target->version < 0x0104)
+-		return;
++	//if (target->version < 0x0104)
++	//	return;
+ 
+ 	session->supported_events |=
+ 				(1 << AVRCP_EVENT_ADDRESSED_PLAYER_CHANGED) |
+ 				(1 << AVRCP_EVENT_AVAILABLE_PLAYERS_CHANGED) |
+ 				(1 << AVRCP_EVENT_VOLUME_CHANGED);
+ 
++	return;
+ 	/* Only check capabilities if controller is not supported */
+ 	if (session->controller == NULL)
+ 		avrcp_get_capabilities(session);
+@@ -4032,11 +4033,12 @@ static void session_init_control(struct avrcp *session)
+ 							session);
+ 	session->control_handlers = control_handlers;
+ 
++	target_init(session);
+ 	if (btd_device_get_service(session->dev, AVRCP_TARGET_UUID) != NULL)
+ 		controller_init(session);
+ 
+-	if (btd_device_get_service(session->dev, AVRCP_REMOTE_UUID) != NULL)
+-		target_init(session);
++	//if (btd_device_get_service(session->dev, AVRCP_REMOTE_UUID) != NULL)
++	//	target_init(session);
+ }
+ 
+ static void controller_destroy(struct avrcp *session)
+-- 
+2.20.1
+

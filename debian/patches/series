@@ -13,3 +13,4 @@ HOGP-must-only-accept-data-from-bonded-devices.patch
 HID-accepts-bonded-device-connections-only.patch
 input-hog-Attempt-to-set-security-level-if-not-bonde.patch
 input-Add-LEAutoSecurity-setting-to-input.conf.patch
+audio-avrcp-fix-absolute-volume-control-in-a2dp-sink.patch
