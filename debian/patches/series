@@ -13,3 +13,4 @@ headers-use-releative-symlinks.patch
 main-Don-t-warn-for-unset-config-option.patch
 shared-gatt-server-Fix-not-properly-checking-for-sec.patch
 gatt-Fix-potential-buffer-out-of-bound.patch
+audio-avrcp-fix-absolute-volume-control-in-a2dp-sink.patch

@@ -1,0 +1,21 @@
+--- a/profiles/audio/avrcp.c
++++ b/profiles/audio/avrcp.c
+@@ -4083,6 +4083,7 @@ static void target_init(struct avrcp *session)
+ 		init_volume = media_player_get_device_volume(session->dev);
+ 		media_transport_update_device_volume(session->dev, init_volume);
+ 	}
++	media_transport_update_device_volume(session->dev, 0);
+ 
+ 	session->supported_events |= (1 << AVRCP_EVENT_STATUS_CHANGED) |
+ 				(1 << AVRCP_EVENT_TRACK_CHANGED) |
+@@ -4090,8 +4091,8 @@ static void target_init(struct avrcp *session)
+ 				(1 << AVRCP_EVENT_TRACK_REACHED_END) |
+ 				(1 << AVRCP_EVENT_SETTINGS_CHANGED);
+ 
+-	if (target->version < 0x0104)
+-		return;
++	//if (target->version < 0x0104)
++	//	return;
+ 
+ 	session->supported_events |=
+ 				(1 << AVRCP_EVENT_ADDRESSED_PLAYER_CHANGED) |

@@ -1,3 +1,9 @@
+bluez (5.55-3.2) unstable; urgency=high
+
+  * audio: avrcp: fix absolute volume control in a2dp sink scenario
+
+ -- Marek Czerski <ma.czerski@gmail.com>  Tue, 19 Jan 2021 09:40:39 +0100
+
 bluez (5.55-3.1) unstable; urgency=high
 
   * Non-maintainer upload.
